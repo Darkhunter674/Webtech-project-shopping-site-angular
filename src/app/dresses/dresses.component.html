@@ -1,0 +1,18 @@
+<div id="Products" class="content-section">
+    <div class="content-wrapper w-container">
+      <div class="w-dyn-list">
+        <div role="list" class="flex-grid w-dyn-items">
+          <div role="listitem" class="collection-item w-dyn-item" *ngFor="let dress of dress">
+            <a [routerLink]="dress.link" class="relative w-inline-block"><img alt="" [src]="dress.image" /></a>
+            <div class="products-details">
+              <a [routerLink]="dress.link" class="link">{{dress.name}}</a>
+              <div>
+                <a [routerLink]="dress.link" class="price">{{dress.price}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
