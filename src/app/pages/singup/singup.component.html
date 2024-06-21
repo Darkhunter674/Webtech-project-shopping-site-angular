@@ -1,4 +1,4 @@
-<div class="background">
+<div class="background" >
   <div class="container" id="container">
     <div class="form-container sign-up-container">
       <form [formGroup]="form">
@@ -10,6 +10,7 @@
         </div>
         <span>or use your email for registration</span>
         <input type="text" formControlName="username" placeholder="UserName"autocomplete="off" />
+        <input type="text" formControlName="address" placeholder="Address"autocomplete="off" />
         <input type="email" formControlName="email" placeholder="Email" autocomplete="off" />
         <input type="password" formControlName="password" placeholder="Password" autocomplete="off" />
         <button (click)="signUp()">Sign Up</button>

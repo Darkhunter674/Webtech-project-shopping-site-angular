@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { Dressdata } from '../dressdata';
+import { Dressdata } from '../app.module';
 
 @Component({
   selector: 'app-clothes',

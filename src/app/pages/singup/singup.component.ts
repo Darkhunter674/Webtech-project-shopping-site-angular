@@ -19,6 +19,7 @@ export class SingupComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       username: [''],
+      address: [''],
       email: [''],
       password: ['']
     });
@@ -29,7 +30,7 @@ export class SingupComponent implements OnInit {
     this.form.reset(); 
   }
   login():void{
-    this.router.navigate(['/login']);
+    this.router.navigate(['/dashboard']);
   }
   signUp(): void {
     interface MyError {
@@ -39,7 +40,7 @@ export class SingupComponent implements OnInit {
     }
     let user =this.form.getRawValue()
     
-    if (user.username =="" && user.email =="" && user.password =="") {
+    if (user.username =="" && user.email =="" &&user.address =="" && user.password =="") {
       alert('Please enter all the values');
     } else {
       this.http.post("http://localhost:8000/signup", user,{

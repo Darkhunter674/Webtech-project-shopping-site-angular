@@ -4,7 +4,7 @@ import { DressesComponent } from "../dresses/dresses.component";
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from "../main/main.component";
-import { Dressdata } from '../dressdata';
+import { Dressdata } from '../app.module';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',

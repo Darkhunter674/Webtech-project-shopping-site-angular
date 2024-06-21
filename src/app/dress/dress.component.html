@@ -1,89 +1,71 @@
 <div>
   <div class="product-section">
-  <div class="content-wrapper w-container">
-    <div class="hero-flex vertical">
-      <div class="product-slider">
-        <div
-          data-delay="4000"
-          data-animation="slide"
-          class="slider-2 w-slider"
-          data-autoplay="false"
-          data-easing="ease"
-          data-hide-arrows="false"
-          data-disable-swipe="false"
-          data-autoplay-limit="0"
-          data-nav-spacing="3"
-          data-duration="500"
-          data-infinite="true"
-        >
-          <div class="w-slider-mask">
-            <div
-             style="
-                background-image: url('{{dress.image}}');
-              "
-              class="product-slide w-slide"
-            ></div>
-            <div
-              style="
-                background-image: url('{{dress.image}}');
-              "
-              class="product-slide w-slide"
-            ></div>
-            <div
-              style="
-                background-image: url('{{dress.image}}');
-              "
-              class="product-slide w-slide"
-            ></div>
-          </div>
-          <div class="w-slider-arrow-left">
-            <div class="w-icon-slider-left"></div>
-          </div>
-          <div class="w-slider-arrow-right">
-            <div class="w-icon-slider-right"></div>
-          </div>
-          <div class="slide-nav-2 w-slider-nav w-round"></div>
-        </div>
-      </div>
-      <div class="product-description">
-        <div class="_100-percent">
-          <h1 class="h1-white medium">{{dress.name}}</h1>
-          <div>
-            <div
-             
-              class="price large"
-            >
-              {{ dress.price }}
+    <div class="content-wrapper w-container">
+      <div class="hero-flex vertical">
+        <div class="product-slider">
+          <div
+            data-delay="4000"
+            data-animation="slide"
+            class="slider-2 w-slider"
+            data-autoplay="false"
+            data-easing="ease"
+            data-hide-arrows="false"
+            data-disable-swipe="false"
+            data-autoplay-limit="0"
+            data-nav-spacing="3"
+            data-duration="500"
+            data-infinite="true"
+          >
+            <div class="w-slider-mask">
+              <div
+                [ngStyle]="{ 'background-image': 'url(' + dress.image + ')' }"
+                class="product-slide w-slide"
+              ></div>
+              <div
+                [ngStyle]="{ 'background-image': 'url(' + dress.image + ')' }"
+                class="product-slide w-slide"
+              ></div>
+              <div
+                [ngStyle]="{ 'background-image': 'url(' + dress.image + ')' }"
+                class="product-slide w-slide"
+              ></div>
             </div>
+            <div class="slide-nav-2 w-slider-nav w-round"></div>
           </div>
-          <div>
-            <form
-              
-              class="w-commerce-commerceaddtocartform"
-            >
-              <label
-                for="quantity-365a2a9c1e4948670206db86f35fa1c9"
-                class="quantity-white"
-                >Quantity</label
-              ><input
-                type="number"
-                pattern="^[0-9]+$"
-                inputmode="numeric"
-                id="quantity-365a2a9c1e4948670206db86f35fa1c9"
-                name="commerce-add-to-cart-quantity-input"
-                min="1"
-                class="w-commerce-commerceaddtocartquantityinput quantity"
-                value="1"
-              /><input
-                type="submit"
-                data-node-type="commerce-add-to-cart-button"
-                data-loading-text="Adding to cart..."
-                aria-busy="false"
-                aria-haspopup="dialog"
-                class="w-commerce-commerceaddtocartbutton submit-button-5"
-                value="Add to Cart"
-              /><a
-                
+        </div>
+        <div class="product-description">
+          <div class="_100-percent">
+            <h1 class="h1-white medium">{{ dress.name }}</h1>
+            <div>
+              <div class="price large">
+                {{ dress.price }}
+              </div>
+            </div>
+            <div>
+              <form (ngSubmit)="addToCart(quantityInput.value)">
+                <label for="quantity-365a2a9c1e4948670206db86f35fa1c9" class="quantity-white">Quantity</label>
+                <input
+                  type="number"
+                  pattern="^[0-9]+$"
+                  inputmode="numeric"
+                  id="quantity-365a2a9c1e4948670206db86f35fa1c9"
+                  name="commerce-add-to-cart-quantity-input"
+                  min="1"
+                  class="w-commerce-commerceaddtocartquantityinput quantity"
+                  #quantityInput
+                  value="1"
+                />
+                <input
+                  type="submit"
+                  data-node-type="commerce-add-to-cart-button"
+                  data-loading-text="Adding to cart..."
+                  aria-busy="false"
+                  aria-haspopup="dialog"
+                  class="w-commerce-commerceaddtocartbutton submit-button-5"
+                  value="Add to Cart"
+                />
+              </form>
+              <a
                 data-default-text="Buy now"
                 data-subscription-text="Subscribe now"
                 aria-busy="false"
@@ -92,12 +74,8 @@
                 routerLink="../../checkout"
                 >Buy now</a
               >
-            </form>
-            <div
-              style="display: none"
-              class="w-commerce-commerceaddtocartoutofstock"
-              tabindex="0"
-            >
+            </div>
+            <div style="display: none" class="w-commerce-commerceaddtocartoutofstock" tabindex="0">
               <div>This product is out of stock.</div>
             </div>
             <div
@@ -106,63 +84,28 @@
               style="display: none"
               class="w-commerce-commerceaddtocarterror"
             >
-              <div
-                
-              >
-                Product is not available in this quantity.
-              </div>
+              <div>Product is not available in this quantity.</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="bg-top"></div>
-  <div class="bg-botttom"></div>
+    <div class="bg-top"></div>
+    <div class="bg-botttom"></div>
   </div>
   <div class="content-section">
-  <div class="content-wrapper w-container">
-    <div>
-      <h3>Description</h3>
-      <p>
-        Name of Packer: Akanksha Label LLP, opp SKM Public School, Rampur
-        Road, Haldwani, Uttarakhand- 263139
-      </p>
-    </div>
-    <div>
-      <h3>Shipping</h3>
-      <p>
-        Name of Packer: Akanksha Label LLP, opp SKM Public School, Rampur
-        Road, Haldwani, Uttarakhand- 263139
-      </p>
-    </div>
-    <div>
-      <h3>Images</h3>
-      <div style="background-image: url('{{dress.image}}');"
-          class="product-image-large"
-      >
-        <div
-           
-          style="
-            background-image: url('{{dress.image}}');
-          "
-          class="product-image-large"
-        ></div>
+    <div class="content-wrapper w-container">
+      <div>
+        <h3>Description</h3>
+       
       </div>
-      <div
-        style="
-          background-image: url('{{dress.image}}');
-        "
-        class="product-image-large"
-      ></div>
-      <div
-        style="
-          background-image: url('{{dress.image}}');
-        "
-        class="product-image-large"
-      ></div>
+      {{ dress.description }}
+      <div>
+       
+        <div>
+          <app-dresses></app-dresses>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-  </div>
-
+</div>

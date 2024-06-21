@@ -1,21 +1,27 @@
-import { NgModule } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { Dressdata } from  '../dressdata';
-import { NgFor } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { MainComponent } from '../main/main.component';
+import { Component } from '@angular/core';
+import { Dressdata } from  '../app.module';
+
 @Component({
   selector: 'app-dresses',
   templateUrl: './dresses.component.html',
-  styleUrl: './dresses.component.css'
-  
+  styleUrls: ['./dresses.component.css']
 })
+export class DressesComponent {
+  dresses =Dressdata;
 
-export class DressesComponent implements OnInit {
-  dress=Dressdata;
-  constructor() {
-}
+  gridColumns = 4; // Default to 3 columns
 
-  ngOnInit(): void { 
+  setGridColumns(columns: number) {
+    this.gridColumns = columns;
+  }
+
+  // Function to determine which grid options to display based on screen size
+  showGridOption(columns: number): boolean {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) {
+      return columns <= 3;
+    } else {
+      return true;
+    }
   }
 }

@@ -22,7 +22,7 @@ export class FormComponent {
     })
     .subscribe(
       (response) => {
-        console.log('Form data sent successfully!');
+       
         // Optionally, you can reset the form here
         this.formData = {};
       },

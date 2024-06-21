@@ -1,17 +1,12 @@
-const userModel = require('./usermodel');
+// services/userService.js
+const User = require('./usermodel');
 
-module.exports.createUserDBService = (userDetails) => {
-    return new Promise((resolve, reject) => {
-        var userModelData = new userModel(userDetails);
-
-        userModelData.save()
-            .then(result => {
-                console.log(result);
-                resolve(true); // Resolve the promise with true indicating success
-            })
-            .catch(err => {
-                console.error(err);
-                resolve(false); // Resolve the promise with false indicating failure
-            });
-    });
-}
+module.exports.createUserDBService = async (userDetails) => {
+  try {
+    const user = await User.create(userDetails);
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};

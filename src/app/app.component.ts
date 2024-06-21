@@ -1,44 +1,71 @@
-import { Component ,OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, Renderer2, ViewChild, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { CartService } from './cart.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'anubhav';
-   
-  constructor(private router: Router) { }
+export class AppComponent implements OnInit {
+  @ViewChild('accountPanel', { static: false }) accountPanel!: ElementRef<HTMLDivElement>;
+  @ViewChild('cartPanel', { static: false }) cartPanel!: ElementRef<HTMLDivElement>;
 
-  isLoginPage(): boolean {
-    return this.router.url.includes('login');
-  }
-  issignupPage(): boolean {
-    return this.router.url.includes('signup');
-  }
-  ngOnInit(): void {}
+  cartItems: any[] = [];
+  hideContent: boolean = false;
+  username = localStorage.getItem('username');
+  userId: number | null = null;
 
-  isLoggedIn(): boolean {
-    // Check if user is logged in (e.g., check token existence)
-    return !!localStorage.getItem('token');
-  }
+  constructor(private router: Router, private renderer: Renderer2, private cartService: CartService) { }
   
-  // getUsername(): string {
-  //   // Get username from session or wherever it's stored
-  //   // For demonstration, let's assume username is stored in local storage
-  //   return localStorage.getItem('username') || '';
-  // }
-  getUsername(): string {
-    // Retrieve username from wherever it's stored, for example, local storage
-    const username = localStorage.getItem('username');
-    return username ? username : ''; // Return empty string if username is null or undefined
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.hideContent = this.router.url === '/signup';
+      }
+    });
+
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.userId = +userId;  // Convert userId to a number
+      this.cartService.loadCartHistory(this.userId).subscribe(); // Initial load of cart history
+      this.cartService.cartItems$.subscribe(cartItems => {
+        this.cartItems = cartItems;
+      });
+    }
+
+    // Close panels when clicking outside them
+    this.addOutsideClickListener(this.accountPanel.nativeElement);
+    this.addOutsideClickListener(this.cartPanel.nativeElement);
   }
-  logout(): void {
-    // Clear token and any other user-related data
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    // Redirect to login page
-    this.router.navigate(['/login']);
+
+  togglePanel(panel: HTMLDivElement) {
+    // Toggle panel visibility
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+  }
+
+  closePanel(panel: HTMLDivElement) {
+    // Close panel
+    panel.style.display = 'none';
+  }
+
+  toggleDisplay() {
+    const div = document.getElementById('myDiv');
+    if (div) {
+      div.style.display = div.style.display === 'none' ? 'block' : 'none';
+    }
+  }
+
+  addOutsideClickListener(panel: HTMLElement) {
+    // Use Renderer2 to handle document click events
+    this.renderer.listen('document', 'click', (event: MouseEvent) => {
+      // Check if the click was outside the panel
+      if (panel && !panel.contains(event.target as Node)) {
+        // Close the panel if it's open
+        if (panel.style.display !== 'none') {
+          this.closePanel(panel as HTMLDivElement);
+        }
+      }
+    });
   }
 }
-  

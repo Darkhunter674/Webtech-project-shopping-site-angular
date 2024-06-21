@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 
 
 * {
@@ -10,9 +10,11 @@
     justify-content: center;
     background-size: cover;
     align-items: center;
-    height: 100vh;
-  
-    
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 999999999999;
+
   }
 
 .container {
